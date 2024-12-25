@@ -50,7 +50,7 @@ export const sendMessage = async (req, res) => {
     });
     await newMessage.save();
     //realtime message sending functionallty will be added here
-    req.status(200).json(newMessage);
+    res.status(200).json(newMessage);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
