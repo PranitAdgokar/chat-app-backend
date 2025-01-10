@@ -1,5 +1,6 @@
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
+import cloudnary from "../lib/cloudnary.js";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
@@ -38,7 +39,7 @@ export const sendMessage = async (req, res) => {
     const senderId = req.user._id;
     let imageUrl;
     if (image) {
-      const uploadResponse = await cloudnary.uploader.upload("image");
+      const uploadResponse = await cloudnary.uploader.upload(image);
       imageUrl = uploadResponse.url;
     }
 
