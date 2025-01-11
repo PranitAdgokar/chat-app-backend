@@ -15,20 +15,40 @@ export const getUsersForSidebar = async (req, res) => {
   }
 };
 
-export const getMessage = async (req, res) => {
+// export const getMessage = async (req, res) => {
+
+//   try {
+//     const { id: userToChatId } = req.params;
+//     const myId = req.user._id;
+//     const messages = await Message.find({
+//       $or: [
+//         { sender: myId, receiver: userToChatId },
+//         { sender: userToChatId, receiver: myId },
+//       ],
+//     });
+//     res.status(200).json(messages);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error.message);
+//   }
+// };
+
+export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const myId = req.user._id;
+
     const messages = await Message.find({
       $or: [
-        { sender: myId, receiver: userToChatId },
-        { sender: userToChatId, receiver: myId },
+        { senderId: myId, receiverId: userToChatId },
+        { senderId: userToChatId, receiverId: myId },
       ],
     });
+
     res.status(200).json(messages);
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.log("Error in getMessages controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
