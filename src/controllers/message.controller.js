@@ -70,7 +70,12 @@ export const sendMessage = async (req, res) => {
       image: imageUrl,
     });
     await newMessage.save();
-    //realtime message sending functionallty will be added here
+
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("getMessage", newMessage);
+    }
+
     res.status(200).json(newMessage);
   } catch (error) {
     console.log(error);
