@@ -8,4 +8,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINIARY_API_SECRET,
 });
 
+const options = {
+  folder: "chat-app",
+  resource_type: "auto",
+};
+
 export default cloudinary;
