@@ -5,7 +5,7 @@ import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { io, server, app } from "./lib/Socket.js";
+import { io, server, app } from "./lib/socket.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
