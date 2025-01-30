@@ -85,7 +85,11 @@ io.on("connection", (socket) => {
   socket.on("sendMessage", async (messageData) => {
     const { receiverId, message } = messageData;
     const receiverSocketId = userSocketMap[receiverId];
-
+    if (!receiverSocketId) {
+      console.log(`Receiver with ID ${receiverId} is not connected`);
+      return;
+    }
+    console.log("receiverSocketId", receiverSocketId);
     // Store initial message status
     messageStatus.set(message._id, {
       status: "sent",
