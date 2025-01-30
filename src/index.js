@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(
   cors({
     //  origin: "http://localhost:5173",
-    origin: "https://chat-app-fronend-seven.vercel.app/", // Allow your frontend
+    origin: "https://chat-app-fronend-seven.vercel.app", // Allow your frontend
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     credentials: true,
   })
