@@ -52,13 +52,18 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid Creadentials" });
     }
     const token = generateToken(user._id, res);
+    res.cookie("jwt", token, {
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
     res.status(200).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       profilePic: user.profilePic,
-      token,
     });
   } catch (error) {
     console.log(error);
