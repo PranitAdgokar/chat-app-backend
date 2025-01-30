@@ -84,6 +84,8 @@ io.on("connection", (socket) => {
   // Handle new message
   socket.on("sendMessage", async (messageData) => {
     const { receiverId, message } = messageData;
+    console.log("receiverId", receiverId);
+    console.log("message", message);
     const receiverSocketId = userSocketMap[receiverId];
     if (!receiverSocketId) {
       console.log(`Receiver with ID ${receiverId} is not connected`);
