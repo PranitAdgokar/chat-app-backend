@@ -51,13 +51,14 @@ export const login = async (req, res) => {
     if (!isPasswordcorrect) {
       return res.status(400).json({ message: "Invalid Creadentials" });
     }
-    generateToken(user._id, res);
+    const token = generateToken(user._id, res);
     res.status(200).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       profilePic: user.profilePic,
+      token,
     });
   } catch (error) {
     console.log(error);
