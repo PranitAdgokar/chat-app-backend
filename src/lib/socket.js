@@ -93,13 +93,14 @@ io.on("connection", (socket) => {
     }
     console.log("receiverSocketId", receiverSocketId);
     // Store initial message status
-    messageStatus.set(message._id, {
-      status: "sent",
-      timestamp: new Date(),
-    });
+    if (message._id)
+      messageStatus.set(message._id, {
+        status: "sent",
+        timestamp: new Date(),
+      });
 
     // If receiver is online, emit message and update status to delivered
-    if (receiverSocketId) {
+    if (receiverSocketId && message._id) {
       io.to(receiverSocketId).emit("newMessage", {
         ...message,
         status: "delivered",
